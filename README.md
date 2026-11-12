@@ -7,3 +7,9 @@ A aplicação tem como objetivo facilitar a organização de atividades pessoais
 O sistema contará com funcionalidades para classificação das tarefas por status, busca e filtros, proporcionando uma visualiação simples e organizada das atividades.
 
 O projeto será desenvolvido utilizando HTML, CSS e JavaScript.
+
+## Funcionalidades previstas
+
+- Cadastro, edição e exclusão de tarefas.
+- Organização das tarefas por status.
+- Busca e filtros para localizar atividades.
