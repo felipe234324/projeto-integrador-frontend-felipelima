@@ -6,40 +6,91 @@
     <title>Gerenciador de Tarefas</title>
 </head>
 <body>
-    <h1>Gerenciador de Tarefas</h1>
-    <img src="assets/images/gerenciador-logo.png" alt="Logo do Gerenciador de Tarefas">
-    <p>
-        Um sistema para organiar atividades, acompanhar prazos e monitorar o andamento das tarefas do dia a dia.
-    </p>
+    <header>
+        <h1>Gerenciador de Tarefas</h1>
+        <img src="assets/images/gerenciador-logo.png" alt="Logo do Gerenciador de Tarefas">
+        <p>
+            Um sistema para organizar atividades, acompanhar prazos e monitorar o andamento das tarefas do dia a dia.
+        </p>
+    </header>
 
-    <h2>Funcionalidades:</h2>
-    <ul>
-        <li>Cadastrar novas tarefas</li>
-        <li>Definir prioridades e prazos</li>
-        <li>Acompanhar o status das atividades</li>
-        <li>Organizar tarefas concluídas e pendentes</li>
-    </ul>
+    <main>
+        <section>
+            <h2>Funcionalidades:</h2>
+            <ul>
+                <li>Cadastrar novas tarefas</li>
+                <li>Definir prioridades e prazos</li>
+                <li>Acompanhar o status das atividades</li>
+                <li>Organizar tarefas concluídas e pendentes</li>
+            </ul>
+        </section>
 
-    <table>
-        <tr>
-            <th>Tarefa</th>
-            <th>Status</th>
-        </tr>
-        <tr>
-            <td>Estudar HTML</td>
-            <td>Concluída</td>
-        </tr>
-        <tr>
-            <td>Praticar CSS</td>
-            <td>Pendente</td>
-        </tr>
-        <tr>
-            <td>Estudar JavaScript</td>
-            <td>Não Iniciada</td>
-        </tr>
-    </table>
+        <section>
+            <h2>Minhas tarefas</h2>
 
-    <h2>Material de Referência sobre HTML:</h2>
-    <a href="https://www.w3schools.com/html/" target="_blank" rel="noopener noreferrer">Para aprender mais, acesse aqui</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tarefa</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Estudar HTML</td>
+                        <td>Concluída</td>
+                    </tr>
+                    <tr>
+                        <td>Praticar CSS</td>
+                        <td>Pendente</td>
+                    </tr>
+                    <tr>
+                        <td>Estudar JavaScript</td>
+                        <td>Não Iniciada</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Cadastrar nova tarefa</h2>
+
+            <form>
+                <fieldset>
+                    <legend>Informações da tarefa</legend>
+                    <label for="nome-tarefa">Nome da tarefa:</label>
+                    <input type="text" id="nome-tarefa" name="nome-tarefa" required>
+
+                    <label for="descricao">Descrição:</label>
+                    <textarea id="descricao" name="descricao"></textarea>
+
+                    <label for="prioridade">Prioridade:</label>
+                    <select id="prioridade" name="prioridade" required>
+                        <option value="">Selecione</option>
+                        <option value="baixa">Baixa</option>
+                        <option value="media">Média</option>
+                        <option value="alta">Alta</option>
+                    </select>
+
+                    <label for="prazo">Prazo:</label>
+                    <input type="date" id="prazo" name="prazo" required>
+
+                    <label for="tempo-estimado">Tempo estimado (minutos):</label>
+                    <input type="number" id="tempo-estimado" name="tempo-estimado" min="1" max="1440">
+                </fieldset>
+                <button type="submit">Cadastrar Tarefa</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Material de Referência sobre HTML:</h2>
+            <a href="https://www.w3schools.com/html/" target="_blank" rel="noopener noreferrer">Para aprender mais, acesse aqui</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>Projeto Integrador - Gerenciador de Tarefas</p>
+    </footer>
 </body>
 </html>
