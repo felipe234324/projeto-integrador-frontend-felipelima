@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -9,9 +10,29 @@
     <header>
         <h1>Gerenciador de Tarefas</h1>
         <img src="assets/images/gerenciador-logo.png" alt="Logo do Gerenciador de Tarefas">
-        <p>
-            Um sistema para organizar atividades, acompanhar prazos e monitorar o andamento das tarefas do dia a dia.
-        </p>
+
+        <p>Um sistema para organizar atividades, acompanhar prazos e monitorar o andamento das tarefas do dia a dia.</p>
+
+        <!-- Ícone SVG do Gerenciador de Tarefas -->
+        <svg
+            width="64"
+            height="64"
+            viewBox="0 0 64 64"
+            role="img"
+            aria-labelledby="titulo-icone"
+        >
+            <title id="titulo-icone">Ícone de lista de tarefas</title>
+            <rect x="8" y="6" width="48" height="52" rx="6" fill="#1F6FB2"/>
+            <rect x="18" y="17" width="6" height="6" rx="1" fill="white"/>
+            <path d="M19 20 L21 22 L25 17" stroke="#1F6FB2" stroke-width="1.5" fill="none"/>
+            <rect x="29" y="18" width="17" height="3" rx="1" fill="white"/>
+            <rect x="18" y="30" width="6" height="6" rx="1" fill="white"/>
+            <path d="M19 33 L21 35 L25 30" stroke="#1F6FB2" stroke-width="1.5" fill="none"/>
+            <rect x="29" y="31" width="17" height="3" rx="1" fill="white"/>
+            <rect x="18" y="43" width="6" height="6" rx="1" fill="white"/>
+            <rect x="29" y="44" width="17" height="3" rx="1" fill="white"/>
+        </svg>
+
     </header>
 
     <main>
@@ -51,6 +72,49 @@
                     </tr>
                 </tbody>
             </table>
+        </section>
+
+        <section>
+            <h2>Gráfico de tarefas por status</h2>
+
+            <canvas id="grafico-tarefas" width="400" height="250">
+                Gráfico de tarefas: 1 tarefa concluída, 1 tarefa pendente e 1 tarefa não iniciada.
+            </canvas>
+
+            <script>
+                const canvas = document.getElementById("grafico-tarefas");
+                const contexto = canvas.getContext("2d");
+
+                // Fundo do gráfico
+                contexto.fillStyle = "#f0f0f0";
+                contexto.fillRect(0, 0, 400, 250);
+
+                // Título do gráfico
+                contexto.fillStyle = "#000000";
+                contexto.font = "16px Arial";
+                contexto.fillText("Quantidade de tarefas", 120, 25);
+
+                // Barra de tarefas concluídas
+                contexto.fillStyle = "#2e8b57";
+                contexto.fillRect(70, 70, 60, 100);
+                contexto.fillStyle = "#000000";
+                contexto.fillText("Concluídas", 55, 190);
+                contexto.fillText("1", 95, 60);
+
+                // Barra de tarefas pendentes
+                contexto.fillStyle = "#e6a23c";
+                contexto.fillRect(170, 70, 60, 100);
+                contexto.fillStyle = "#000000";
+                contexto.fillText("Pendentes", 160, 190);
+                contexto.fillText("1", 195, 60);
+
+                // Barra de tarefas não iniciadas
+                contexto.fillStyle = "#1F6FB2";
+                contexto.fillRect(270, 70, 60, 100);
+                contexto.fillStyle = "#000000";
+                contexto.fillText("Não iniciadas", 260, 190);
+                contexto.fillText("1", 295, 60);
+            </script>
         </section>
 
         <section>
