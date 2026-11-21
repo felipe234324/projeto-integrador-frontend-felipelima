@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -107,6 +108,10 @@
         <section id="tarefas" class="card">
             <h2>Minhas tarefas</h2>
 
+            <button type="button" id="botao-analisar" class="botao">
+                Analisar tarefas
+            </button>
+
             <table>
                 <thead>
                     <tr>
@@ -115,19 +120,7 @@
                     </tr>
                 </thead>
 
-                <tbody>
-                    <tr>
-                        <td>Estudar HTML</td>
-                        <td>Concluída</td>
-                    </tr>
-                    <tr>
-                        <td>Praticar CSS</td>
-                        <td>Pendente</td>
-                    </tr>
-                    <tr>
-                        <td>Estudar JavaScript</td>
-                        <td>Não Iniciada</td>
-                    </tr>
+                <tbody id="lista-tarefas">
                 </tbody>
             </table>
         </section>
@@ -219,5 +212,7 @@
     <footer>
         <p>Projeto Integrador - Gerenciador de Tarefas</p>
     </footer>
+
+    <script src="js/logica.js" defer></script>
 </body>
 </html>
