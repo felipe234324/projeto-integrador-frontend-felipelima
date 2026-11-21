@@ -12,6 +12,14 @@
         <nav class="navbar">
             <img src="assets/images/gerenciador-logo.png" alt="Logo do Gerenciador de Tarefas">
             <h1>Gerenciador de Tarefas</h1>
+
+            <ul class="navbar-links">
+                <li><a href="#funcionalidades">Funcionalidades</a></li>
+                <li><a href="#tarefas">Tarefas</a></li>
+                <li><a href="#grafico">Gráfico</a></li>
+                <li><a href="#cadastro">Cadastrar</a></li>
+                <li><a href="#referencia">Referência</a></li>
+            </ul>
         </nav>
 
         <div class="apresentacao">
@@ -56,9 +64,9 @@
     </header>
 
     <main>
-        <section class="card destaque">
+        <section id="funcionalidades" class="card destaque">
             <h2>Funcionalidades:</h2>
-            <ul>
+            <ul class="grade">
                 <li>Cadastrar novas tarefas</li>
                 <li>Definir prioridades e prazos</li>
                 <li>Acompanhar o status das atividades</li>
@@ -66,7 +74,7 @@
             </ul>
         </section>
 
-        <section class="card">
+        <section id="tarefas" class="card">
             <h2>Minhas tarefas</h2>
 
             <table>
@@ -94,7 +102,7 @@
             </table>
         </section>
 
-        <section class="card">
+        <section id="grafico" class="card">
             <h2>Gráfico de tarefas por status</h2>
 
             <canvas id="grafico-tarefas" width="400" height="250">
@@ -137,7 +145,7 @@
             </script>
         </section>
 
-        <section class="card">
+        <section id="cadastro" class="card">
             <h2>Cadastrar nova tarefa</h2>
 
             <form>
@@ -172,7 +180,7 @@
             </form>
         </section>
 
-        <section class="card">
+        <section id="referencia" class="card">
             <h2>Material de Referência sobre HTML:</h2>
             <a href="https://www.w3schools.com/html/" target="_blank" rel="noopener noreferrer">Para aprender mais, acesse aqui</a>
         </section>
