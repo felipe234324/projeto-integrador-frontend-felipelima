@@ -40,7 +40,7 @@ html {
 }
 
 /* Navbar (Flexbox)
-   A página tem várias seções e o visitante
+   position: sticky: a página tem várias seções e o visitante
    precisa trocar de uma para outra sem voltar ao topo. O sticky mantém a
    navbar no fluxo normal, então não cobre o conteúdo nem exige padding extra
    no body. Só funciona porque a navbar é filha direta do body: dentro do
@@ -300,6 +300,7 @@ a:active {
     margin-left: auto;
 }
 
+/* Descendente: afeta os links da navbar e também os do submenu */
 .navbar-links a {
     display: block;
     padding: 0.5rem 0.9rem;
@@ -333,7 +334,7 @@ a:active {
     background-color: var(--cor-secundaria);
 }
 
-/* ---------- Dropdown ---------- */
+/* ---------- Dropdown (via :hover) ---------- */
 
 .tem-submenu {
     position: relative;
@@ -356,6 +357,8 @@ a:active {
     box-shadow: var(--sombra);
 }
 
+/* Filho direto: abre só o submenu do próprio item.
+   :focus-within mantém o menu acessível pelo teclado. */
 .tem-submenu:hover > .submenu,
 .tem-submenu:focus-within > .submenu {
     display: block;
@@ -378,6 +381,7 @@ a:active {
     border-radius: 2px;
 }
 
+/* Irmão adjacente: espaça uma barra da outra sem margem na primeira */
 .menu-hamburguer span + span {
     margin-top: 0.3rem;
 }
@@ -413,6 +417,8 @@ a:active {
     margin-top: var(--espacamento);
 }
 
+/* Cada item é um card em coluna: ícone em cima, texto embaixo.
+   --cor-destaque é a cor de cada card (borda de cima e ícone). */
 .grade li {
     --cor-destaque: var(--cor-principal);
     display: flex;
@@ -425,6 +431,8 @@ a:active {
     border-radius: var(--raio-borda);
     color: var(--cor-secundaria);
     font-weight: bold;
+    /* Hover com transform (e não width/height/margin): não recalcula
+       o layout, então os outros cards não se mexem e a animação é mais fluida */
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -433,7 +441,7 @@ a:active {
     box-shadow: var(--sombra);
 }
 
-/* Ícone circular criado com CSS */
+/* Ícone circular criado só com CSS */
 .grade li::before {
     display: flex;
     align-items: center;
@@ -446,6 +454,7 @@ a:active {
     font-size: 1.25rem;
 }
 
+/* Pseudo-classe estrutural */
 .grade li:nth-child(1)::before {
     content: "+";
     content: "+" / "";
@@ -501,4 +510,78 @@ footer {
     text-align: center;
     margin-top: 2rem;
     border-top: 6px solid var(--cor-principal);
+}
+
+/* ---------- Resultado: progresso das atividades ---------- */
+.resumo-atividades {
+    padding: 0.8rem 1rem;
+    margin: var(--espacamento) 0 0;
+    background-color: var(--cor-fundo);
+    border-radius: var(--raio-borda);
+    color: var(--cor-secundaria);
+    font-weight: bold;
+}
+
+.lista-atividades {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--espacamento);
+    margin-top: var(--espacamento);
+}
+
+.cartao-atividade {
+    --cor-faixa: var(--cor-borda);
+    padding: 1rem 1.25rem;
+    background-color: var(--cor-branco);
+    border: 1px solid var(--cor-borda);
+    border-left: 6px solid var(--cor-faixa);
+    border-radius: var(--raio-borda);
+}
+
+.cartao-atividade h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1.1rem;
+    color: var(--cor-secundaria);
+}
+
+.cartao-atividade p {
+    margin: 0 0 0.5rem;
+    font-size: 0.9rem;
+}
+
+.cartao-atividade progress {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    accent-color: var(--cor-faixa);
+}
+
+.rotulo-faixa {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    background-color: var(--cor-faixa);
+    color: var(--cor-branco);
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.faixa-concluida {
+    --cor-faixa: var(--cor-sucesso);
+}
+
+.faixa-avancada {
+    --cor-faixa: var(--cor-principal);
+}
+
+.faixa-andamento {
+    --cor-faixa: var(--cor-alerta);
+}
+
+.faixa-andamento .rotulo-faixa {
+    color: var(--cor-texto);
+}
+
+.faixa-nao-iniciada {
+    --cor-faixa: var(--cor-secundaria);
 }
