@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1d4653">
     <title>Gerenciador de Tarefas</title>
+    <link rel="icon" type="image/png" href="assets/images/gerenciador-logo.png">
+    <link rel="apple-touch-icon" href="assets/images/gerenciador-logo.png">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -37,12 +40,13 @@
         </button>
 
         <ul class="navbar-links" id="menu-principal">
-            <li><a href="#cabecalho-principal" class="ativo" aria-current="page">Início</a></li>
+            <li><a href="#cabecalho-principal" class="ativo" aria-current="location">Início</a></li>
             <li><a href="#funcionalidades">Funcionalidades</a></li>
             <li class="tem-submenu">
                 <a href="#tarefas">Tarefas</a>
                 <ul class="submenu">
                     <li><a href="#tarefas">Lista de tarefas</a></li>
+                    <li><a href="#resultado">Progresso</a></li>
                     <li><a href="#grafico">Gráfico por status</a></li>
                 </ul>
             </li>
@@ -53,43 +57,60 @@
 
     <header id="cabecalho-principal">
         <div class="apresentacao">
-            <!-- Ícone SVG do Gerenciador de Tarefas: calendário com tarefas por status -->
-            <svg
-                width="64"
-                height="64"
-                viewBox="0 0 64 64"
-                role="img"
-                aria-labelledby="titulo-icone"
-            >
-                <title id="titulo-icone">Calendário com lista de tarefas e seus status</title>
+            <div class="apresentacao-texto">
+                <span class="apresentacao-selo">Projeto Integrador</span>
+                <h2>Organize suas tarefas com clareza</h2>
+                <p>Um sistema para organizar atividades, acompanhar prazos e monitorar o andamento das tarefas do dia a dia.</p>
 
-                <!-- Argolas do calendário -->
-                <rect x="18" y="4" width="4" height="12" rx="2" fill="#1d4653"/>
-                <rect x="42" y="4" width="4" height="12" rx="2" fill="#1d4653"/>
+                <div class="apresentacao-acoes">
+                    <a href="#cadastro" class="botao botao-claro">Cadastrar tarefa</a>
+                    <a href="#tarefas" class="botao botao-contorno">Ver minhas tarefas</a>
+                </div>
 
-                <!-- Corpo do calendário -->
-                <rect x="6" y="10" width="52" height="50" rx="6" fill="white" stroke="#1d4653" stroke-width="3"/>
+                <ul class="apresentacao-numeros" aria-label="Resumo das atividades">
+                    <li><strong id="numero-total">0</strong><span>atividades</span></li>
+                    <li><strong id="numero-concluidas">0</strong><span>concluídas</span></li>
+                    <li><strong id="numero-pendentes">0</strong><span>pendentes</span></li>
+                </ul>
+            </div>
 
-                <!-- Faixa superior (prazos) -->
-                <rect x="7.5" y="11.5" width="49" height="13" rx="4.5" fill="#1F6FB2"/>
-                <rect x="7.5" y="18" width="49" height="6.5" fill="#1F6FB2"/>
+            <div class="apresentacao-ilustracao">
+                <!-- Ícone SVG do Gerenciador de Tarefas: calendário com tarefas por status -->
+                <svg
+                    width="64"
+                    height="64"
+                    viewBox="0 0 64 64"
+                    role="img"
+                    aria-labelledby="titulo-icone"
+                >
+                    <title id="titulo-icone">Calendário com lista de tarefas e seus status</title>
 
-                <!-- Tarefa concluída -->
-                <circle cx="17" cy="33" r="4" fill="#2e8b57"/>
-                <path d="M14.6 33.2 L16.6 35.2 L19.6 31.4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <rect x="26" y="31.5" width="24" height="3" rx="1.5" fill="#1d4653"/>
+                    <!-- Argolas do calendário -->
+                    <rect x="18" y="4" width="4" height="12" rx="2" fill="#1d4653"/>
+                    <rect x="42" y="4" width="4" height="12" rx="2" fill="#1d4653"/>
 
-                <!-- Tarefa pendente -->
-                <circle cx="17" cy="43" r="4" fill="#e6a23c"/>
-                <path d="M17 40.8 V43 L18.8 44.2" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <rect x="26" y="41.5" width="20" height="3" rx="1.5" fill="#8fa5b3"/>
+                    <!-- Corpo do calendário -->
+                    <rect x="6" y="10" width="52" height="50" rx="6" fill="white" stroke="#1d4653" stroke-width="3"/>
 
-                <!-- Tarefa não iniciada -->
-                <circle cx="17" cy="53" r="3.5" fill="white" stroke="#1F6FB2" stroke-width="2"/>
-                <rect x="26" y="51.5" width="16" height="3" rx="1.5" fill="#8fa5b3"/>
-            </svg>
+                    <!-- Faixa superior (prazos) -->
+                    <rect x="7.5" y="11.5" width="49" height="13" rx="4.5" fill="#1F6FB2"/>
+                    <rect x="7.5" y="18" width="49" height="6.5" fill="#1F6FB2"/>
 
-            <p>Um sistema para organizar atividades, acompanhar prazos e monitorar o andamento das tarefas do dia a dia.</p>
+                    <!-- Tarefa concluída -->
+                    <circle cx="17" cy="33" r="4" fill="#2e8b57"/>
+                    <path d="M14.6 33.2 L16.6 35.2 L19.6 31.4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    <rect x="26" y="31.5" width="24" height="3" rx="1.5" fill="#1d4653"/>
+
+                    <!-- Tarefa pendente -->
+                    <circle cx="17" cy="43" r="4" fill="#e6a23c"/>
+                    <path d="M17 40.8 V43 L18.8 44.2" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    <rect x="26" y="41.5" width="20" height="3" rx="1.5" fill="#8fa5b3"/>
+
+                    <!-- Tarefa não iniciada -->
+                    <circle cx="17" cy="53" r="3.5" fill="white" stroke="#1F6FB2" stroke-width="2"/>
+                    <rect x="26" y="51.5" width="16" height="3" rx="1.5" fill="#8fa5b3"/>
+                </svg>
+            </div>
         </div>
     </header>
 
@@ -107,68 +128,56 @@
         <section id="tarefas" class="card">
             <h2>Minhas tarefas</h2>
 
+            <p class="texto-apoio">Clique em "Analisar tarefas" para classificar cada tarefa pelo prazo e registrar o que você já concluiu.</p>
+
             <button type="button" id="botao-analisar" class="botao">
                 Analisar tarefas
             </button>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Tarefa</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
+            <div class="tabela-rolagem">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Tarefa</th>
+                            <th scope="col">Prioridade</th>
+                            <th scope="col">Prazo</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
 
-                <tbody id="lista-tarefas">
-                </tbody>
-            </table>
+                    <tbody id="lista-tarefas">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="resultado-analise" class="resultado-analise" aria-live="polite" hidden></div>
         </section>
 
         <section id="resultado" class="card">
             <h2>Progresso das atividades</h2>
+
+            <label for="busca-atividade">Buscar atividade:</label>
+            <div class="campo-busca">
+                <svg class="icone-lupa" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M20 20 L16.2 16.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <input type="search" id="busca-atividade" name="busca-atividade" placeholder="Digite parte do nome" autocomplete="off">
+            </div>
+
+            <div id="resumo" class="resumo-atividades" aria-live="polite"></div>
+
+            <div id="lista-atividades" class="lista-atividades" tabindex="-1"></div>
         </section>
 
         <section id="grafico" class="card">
             <h2>Gráfico de tarefas por status</h2>
 
-            <canvas id="grafico-tarefas" width="400" height="250">
-                Gráfico de tarefas: 1 tarefa concluída, 1 tarefa pendente e 1 tarefa não iniciada.
+            <canvas id="grafico-tarefas" width="400" height="250" role="img" aria-label="Gráfico de tarefas por status">
+                Gráfico de tarefas por status. Ative o JavaScript para ver os números atualizados.
             </canvas>
 
-            <script>
-                const canvas = document.getElementById("grafico-tarefas");
-                const contexto = canvas.getContext("2d");
-
-                // Fundo do gráfico
-                contexto.fillStyle = "#f0f0f0";
-                contexto.fillRect(0, 0, 400, 250);
-
-                // Título do gráfico
-                contexto.fillStyle = "#000000";
-                contexto.font = "16px Arial";
-                contexto.fillText("Quantidade de tarefas", 120, 25);
-
-                // Barra de tarefas concluídas
-                contexto.fillStyle = "#2e8b57";
-                contexto.fillRect(70, 70, 60, 100);
-                contexto.fillStyle = "#000000";
-                contexto.fillText("Concluídas", 55, 190);
-                contexto.fillText("1", 95, 60);
-
-                // Barra de tarefas pendentes
-                contexto.fillStyle = "#e6a23c";
-                contexto.fillRect(170, 70, 60, 100);
-                contexto.fillStyle = "#000000";
-                contexto.fillText("Pendentes", 160, 190);
-                contexto.fillText("1", 195, 60);
-
-                // Barra de tarefas não iniciadas
-                contexto.fillStyle = "#1F6FB2";
-                contexto.fillRect(270, 70, 60, 100);
-                contexto.fillStyle = "#000000";
-                contexto.fillText("Não iniciadas", 260, 190);
-                contexto.fillText("1", 295, 60);
-            </script>
+            <ul id="legenda-grafico" class="legenda-grafico" aria-label="Legenda do gráfico"></ul>
         </section>
 
         <section id="cadastro" class="card">
@@ -178,10 +187,20 @@
                 <fieldset>
                     <legend>Informações da tarefa</legend>
                     <label for="nome-tarefa">Nome da tarefa:</label>
-                    <input type="text" id="nome-tarefa" name="nome-tarefa" required>
+                    <input type="text" id="nome-tarefa" name="nome-tarefa" maxlength="80" placeholder="Ex.: Revisar o capítulo 3" required>
 
                     <label for="descricao">Descrição:</label>
-                    <textarea id="descricao" name="descricao"></textarea>
+                    <textarea id="descricao" name="descricao" maxlength="240" placeholder="Detalhes que ajudam a lembrar o que precisa ser feito"></textarea>
+
+                    <label for="categoria">Categoria:</label>
+                    <input type="text" id="categoria" name="categoria" list="lista-categorias" maxlength="30" placeholder="Escolha uma da lista ou digite a sua" autocomplete="off">
+                    <datalist id="lista-categorias">
+                        <option value="Estudo"></option>
+                        <option value="Trabalho"></option>
+                        <option value="Casa"></option>
+                        <option value="Saúde"></option>
+                        <option value="Geral"></option>
+                    </datalist>
 
                     <label for="prioridade">Prioridade:</label>
                     <select id="prioridade" name="prioridade" required>
@@ -195,7 +214,7 @@
                     <input type="date" id="prazo" name="prazo" required>
 
                     <label for="tempo-estimado">Tempo estimado (minutos):</label>
-                    <input type="number" id="tempo-estimado" name="tempo-estimado" min="1" max="1440">
+                    <input type="number" id="tempo-estimado" name="tempo-estimado" min="1" max="1440" placeholder="Ex.: 60">
                 </fieldset>
                 <button type="submit" class="botao">Cadastrar Tarefa</button>
                 <audio id="som-confirmacao" preload="none">
@@ -204,17 +223,57 @@
                     Seu navegador não suporta a reprodução de áudio.
                 </audio>
             </form>
+
+            <p id="mensagem-cadastro" class="mensagem-cadastro" aria-live="polite"></p>
         </section>
 
-        <section id="referencia" class="card">
-            <h2>Material de Referência sobre HTML:</h2>
-            <a href="https://www.w3schools.com/html/" target="_blank" rel="noopener noreferrer">Para aprender mais, acesse aqui</a>
+        <section id="referencia" class="card" aria-labelledby="titulo-referencia">
+            <h2 id="titulo-referencia">Materiais de Referência:</h2>
+            <ul>
+                <li><a href="https://www.w3schools.com/html/" target="_blank" rel="noopener noreferrer">Para aprender mais sobre HTML</a></li>
+                <li><a href="https://www.w3schools.com/css/" target="_blank" rel="noopener noreferrer">Para aprender mais sobre CSS</a></li>
+                <li><a href="https://www.w3schools.com/js/" target="_blank" rel="noopener noreferrer">Para aprender mais sobre JS</a></li>
+            </ul>
         </section>
     </main>
 
     <footer>
         <p>Projeto Integrador - Gerenciador de Tarefas</p>
     </footer>
+
+    <!-- Modal de entrada: substitui o prompt() do navegador (usado em logica.js) -->
+    <dialog id="modal-entrada" class="modal" data-icone="relogio" aria-labelledby="modal-titulo" aria-describedby="modal-mensagem">
+        <form class="modal-formulario" novalidate>
+            <div class="modal-cabecalho">
+                <span class="modal-icone modal-icone-relogio" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="24" height="24" focusable="false">
+                        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 7 V12 L15.5 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span class="modal-icone modal-icone-check" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="24" height="24" focusable="false">
+                        <path d="M5 12.5 L10 17.5 L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <h2 id="modal-titulo" class="modal-titulo"></h2>
+            </div>
+
+            <p id="modal-mensagem" class="modal-mensagem"></p>
+
+            <label for="modal-campo" id="modal-rotulo"></label>
+            <input id="modal-campo" name="modal-campo" type="text" autocomplete="off">
+            <datalist id="modal-sugestoes"></datalist>
+
+            <p id="modal-erro" class="modal-erro" role="alert"></p>
+            <p id="modal-retorno" class="modal-retorno" aria-live="polite" hidden></p>
+
+            <div class="modal-acoes">
+                <button type="button" id="modal-cancelar" class="botao botao-secundario">Cancelar</button>
+                <button type="submit" id="modal-confirmar" class="botao">Confirmar</button>
+            </div>
+        </form>
+    </dialog>
 
     <script src="js/logica.js" defer></script>
     <script src="js/script.js" defer></script>

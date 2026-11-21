@@ -4,13 +4,16 @@
     --cor-secundaria: #1d4653;
     --cor-fundo: #f4f6f8;
     --cor-texto: #333333;
+    --cor-texto-suave: #5b6770;
     --cor-branco: #ffffff;
     --cor-borda: #dddddd;
     --cor-sucesso: #2e8b57;
     --cor-alerta: #d98500;
+    --cor-perigo: #b3261e;
     --espacamento: 1rem;
     --raio-borda: 0.5rem;
     --sombra: 0 2px 8px rgba(0, 0, 0, 0.12);
+    --sombra-forte: 0 10px 30px rgba(0, 0, 0, 0.18);
 }
 
 /* ---------- Justificativa ----------
@@ -36,6 +39,10 @@ html {
 
 /* Seletor de ID: o cabeçalho principal é único na página */
 #cabecalho-principal {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--cor-secundaria) 0%, #12303a 100%);
+    color: var(--cor-branco);
     border-bottom: 6px solid var(--cor-principal);
 }
 
@@ -76,30 +83,138 @@ html {
     color: var(--cor-secundaria);
 }
 
-/* Faixa de apresentação: ícone ao lado do texto descritivo */
+/* Faixa de apresentação: texto à esquerda e ilustração à direita (CSS Grid),
+   alinhada à largura do conteúdo principal */
 .apresentacao {
-    display: flex;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
     align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: var(--espacamento);
-    padding: 2rem var(--espacamento);
-    background-color: var(--cor-secundaria);
-    color: var(--cor-branco);
+    gap: 2.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3.5rem var(--espacamento);
 }
 
-.apresentacao svg {
-    flex-shrink: 0;
-    width: 64px;
-    height: 64px;
-    padding: 0.5rem;
-    background-color: var(--cor-branco);
-    border-radius: var(--raio-borda);
+.apresentacao-selo {
+    display: inline-block;
+    padding: 0.3rem 0.9rem;
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.apresentacao h2 {
+    margin: 1rem 0 0.75rem;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    line-height: 1.15;
 }
 
 .apresentacao p {
-    flex: 1 1 260px;
-    max-width: 520px;
+    max-width: 34rem;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.apresentacao-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+/* Botões do cabeçalho: o seletor mais específico vence a cor padrão dos links (a:link) */
+.apresentacao-acoes a.botao {
+    margin-top: 0;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.apresentacao-acoes a.botao-claro:link,
+.apresentacao-acoes a.botao-claro:visited {
+    background-color: var(--cor-branco);
+    border-color: var(--cor-branco);
+    color: var(--cor-secundaria);
+}
+
+.apresentacao-acoes a.botao-claro:hover {
+    background-color: #e3eef7;
+    border-color: #e3eef7;
+    color: var(--cor-secundaria);
+}
+
+.apresentacao-acoes a.botao-contorno:link,
+.apresentacao-acoes a.botao-contorno:visited {
+    background-color: transparent;
+    border-color: rgba(255, 255, 255, 0.6);
+    color: var(--cor-branco);
+}
+
+.apresentacao-acoes a.botao-contorno:hover {
+    background-color: rgba(255, 255, 255, 0.14);
+    border-color: var(--cor-branco);
+    color: var(--cor-branco);
+}
+
+.apresentacao-acoes a.botao:focus-visible {
+    outline: 3px solid var(--cor-branco);
+    outline-offset: 3px;
+}
+
+/* Números do cabeçalho: acompanham as atividades cadastradas */
+.apresentacao-numeros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.apresentacao-numeros li {
+    display: flex;
+    flex-direction: column;
+    min-width: 6.5rem;
+    margin-bottom: 0;
+    padding: 0.6rem 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--raio-borda);
+}
+
+.apresentacao-numeros strong {
+    font-size: 1.6rem;
+    line-height: 1.1;
+}
+
+.apresentacao-numeros span {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Ilustração: o ícone em tamanho grande, dentro de um cartão translúcido */
+.apresentacao-ilustracao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 1.5rem;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+
+.apresentacao-ilustracao svg {
+    display: block;
+    width: 100%;
+    max-width: 13rem;
+    height: auto;
+    filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.3));
 }
 
 /* ---------- Conteúdo principal ---------- */
@@ -138,6 +253,7 @@ button,
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
 button:hover,
@@ -152,6 +268,35 @@ button:active,
     border-color: var(--cor-sucesso);
 }
 
+button:focus-visible,
+.botao:focus-visible {
+    outline: 3px solid var(--cor-principal);
+    outline-offset: 2px;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Botão secundário: contorno, sem preenchimento */
+.botao-secundario {
+    background-color: transparent;
+    color: var(--cor-secundaria);
+    border-color: var(--cor-borda);
+}
+
+.botao-secundario:hover {
+    background-color: var(--cor-fundo);
+    border-color: var(--cor-secundaria);
+    color: var(--cor-secundaria);
+}
+
+.botao-secundario:active {
+    background-color: var(--cor-borda);
+    border-color: var(--cor-secundaria);
+}
+
 /* ---------- Títulos ---------- */
 
 /* Filho direto: afeta só o h2 que é filho imediato do card */
@@ -161,6 +306,11 @@ button:active,
     padding-bottom: 0.5rem;
     color: var(--cor-secundaria);
     border-bottom: 3px solid var(--cor-principal);
+}
+
+.texto-apoio {
+    margin: 0;
+    color: var(--cor-texto-suave);
 }
 
 /* ---------- Listas ---------- */
@@ -179,10 +329,19 @@ li::marker {
 }
 
 /* ---------- Tabela de tarefas ---------- */
+/* O contêiner rola na horizontal em telas estreitas, sem quebrar a página */
+.tabela-rolagem {
+    margin-top: var(--espacamento);
+    overflow-x: auto;
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+}
+
 table {
     width: 100%;
+    min-width: 34rem;
     border-collapse: collapse;
-    margin: var(--espacamento) 0 0;
+    margin: 0;
 }
 
 th {
@@ -195,19 +354,159 @@ th {
 td {
     padding: 0.8rem;
     border: 1px solid var(--cor-borda);
+    vertical-align: top;
 }
 
 tbody tr:nth-child(even) {
     background-color: var(--cor-fundo);
 }
 
+tbody tr:hover {
+    background-color: #e8f1f8;
+}
+
+/* Nome da tarefa com a descrição logo abaixo */
+td strong {
+    display: block;
+    color: var(--cor-secundaria);
+}
+
+.descricao-tabela {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.85rem;
+    color: var(--cor-texto-suave);
+}
+
+/* Selo de prioridade (tabela e cartões) */
+.selo-prioridade {
+    display: inline-block;
+    padding: 0.15rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    white-space: nowrap;
+}
+
+.prioridade-alta {
+    background-color: #fdecea;
+    color: #9c1c14;
+}
+
+.prioridade-media {
+    background-color: #fff4e0;
+    color: #7a4a00;
+}
+
+.prioridade-baixa {
+    background-color: #e6f4ec;
+    color: #1b6b41;
+}
+
+/* Prazo: data e situação (atrasada, hoje, urgente, tranquila) */
+.prazo-data {
+    display: block;
+    font-weight: bold;
+}
+
+.prazo-situacao {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.prazo-atrasado {
+    color: var(--cor-perigo);
+}
+
+.prazo-hoje {
+    color: #9a5b00;
+}
+
+.prazo-proximo {
+    color: #7a5a00;
+}
+
+.prazo-folga {
+    color: #1b6b41;
+}
+
+/* Resumo visível da análise de prazos */
+.resultado-analise {
+    margin-top: var(--espacamento);
+    padding: 1rem 1.25rem;
+    background-color: var(--cor-fundo);
+    border-left: 4px solid var(--cor-principal);
+    border-radius: var(--raio-borda);
+}
+
+.resultado-analise[hidden] {
+    display: none;
+}
+
+.resultado-analise h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--cor-secundaria);
+}
+
+.resultado-analise ul {
+    margin-top: 0.5rem;
+}
+
+.resultado-analise li {
+    margin-bottom: 0.25rem;
+}
+
 /* ---------- Gráfico (canvas) ---------- */
+/* A altura é definida pelo script (proporcional à largura); height: auto vale se o JavaScript estiver desligado */
 canvas {
     display: block;
-    max-width: 100%;
+    width: 100%;
+    max-width: 640px;
     height: auto;
     margin: 0 auto;
     border-radius: var(--raio-borda);
+}
+
+/* Legenda em etiquetas, uma por status */
+.legenda-grafico {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.legenda-grafico li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0.35rem 0.85rem;
+    background-color: var(--cor-fundo);
+    border: 1px solid var(--cor-borda);
+    border-radius: 999px;
+    font-size: 0.9rem;
+}
+
+.legenda-grafico strong {
+    color: var(--cor-secundaria);
+}
+
+.amostra-legenda {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+}
+
+.legenda-grafico .legenda-total {
+    background-color: transparent;
+    border-style: dashed;
+    color: var(--cor-texto-suave);
 }
 
 /* ---------- Formulário ---------- */
@@ -246,6 +545,8 @@ select {
     border-radius: 0.3rem;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1rem;
+    background-color: var(--cor-branco);
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 input:focus,
@@ -334,6 +635,17 @@ a:active {
     background-color: var(--cor-secundaria);
 }
 
+/* Item ativo dentro do submenu: destaque mais suave, para não competir com o item pai */
+.navbar-links .submenu a.ativo {
+    background-color: #e3eef7;
+    color: var(--cor-principal);
+}
+
+.navbar-links .submenu a.ativo:hover {
+    background-color: var(--cor-borda);
+    color: var(--cor-secundaria);
+}
+
 /* ---------- Dropdown (via :hover) ---------- */
 
 .tem-submenu {
@@ -406,6 +718,22 @@ a:active {
     .navbar-links {
         display: none;
     }
+
+    /* Cabeçalho em uma coluna: texto primeiro, ilustração menor logo abaixo */
+    .apresentacao {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 2.5rem var(--espacamento);
+    }
+
+    .apresentacao-ilustracao {
+        justify-self: start;
+        padding: 1.25rem;
+    }
+
+    .apresentacao-ilustracao svg {
+        max-width: 7rem;
+    }
 }
 
 /* ---------- Grade de funcionalidades (CSS Grid) ---------- */
@@ -441,7 +769,7 @@ a:active {
     box-shadow: var(--sombra);
 }
 
-/* Ícone circular criado só com CSS */
+/* Ícone circular criado só com CSS (não precisa de HTML extra) */
 .grade li::before {
     display: flex;
     align-items: center;
@@ -454,7 +782,8 @@ a:active {
     font-size: 1.25rem;
 }
 
-/* Pseudo-classe estrutural */
+/* Pseudo-classe estrutural: a posição do item define a cor e o ícone.
+   As cores repetem as do gráfico (azul, laranja, verde) para o visual ser coerente. */
 .grade li:nth-child(1)::before {
     content: "+";
     content: "+" / "";
@@ -493,12 +822,22 @@ a:active {
     }
 
     .navbar-links a,
-    .grade li {
+    .grade li,
+    button,
+    .botao,
+    input,
+    textarea,
+    select,
+    .apresentacao-acoes a.botao {
         transition: none;
     }
 
     .grade li:hover {
         transform: none;
+    }
+
+    .modal[open] {
+        animation: none;
     }
 }
 
@@ -514,17 +853,52 @@ footer {
 
 /* ---------- Resultado: progresso das atividades ---------- */
 .resumo-atividades {
-    padding: 0.8rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    padding: 0.9rem 1.1rem;
     margin: var(--espacamento) 0 0;
     background-color: var(--cor-fundo);
     border-radius: var(--raio-borda);
     color: var(--cor-secundaria);
+}
+
+.resumo-titulo {
+    margin: 0;
     font-weight: bold;
+}
+
+/* Cada número com o valor em destaque e o nome pequeno embaixo */
+.resumo-numeros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.75rem;
+    margin: 0;
+    padding: 0;
+}
+
+.resumo-numeros div {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.resumo-numeros dt {
+    font-size: 0.8rem;
+    color: var(--cor-texto-suave);
+}
+
+.resumo-numeros dd {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: bold;
+    line-height: 1.2;
 }
 
 .lista-atividades {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: var(--espacamento);
     margin-top: var(--espacamento);
 }
@@ -536,6 +910,11 @@ footer {
     border: 1px solid var(--cor-borda);
     border-left: 6px solid var(--cor-faixa);
     border-radius: var(--raio-borda);
+    transition: box-shadow 0.2s ease;
+}
+
+.cartao-atividade:hover {
+    box-shadow: var(--sombra);
 }
 
 .cartao-atividade h3 {
@@ -551,9 +930,64 @@ footer {
 
 .cartao-atividade progress {
     display: block;
-    width: 100%;
-    margin-bottom: 0.5rem;
+    flex: 1;
+    min-width: 0;
     accent-color: var(--cor-faixa);
+}
+
+/* Barra de progresso com o percentual ao lado */
+.linha-progresso {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.percentual-atividade {
+    min-width: 2.5rem;
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-align: right;
+    color: var(--cor-secundaria);
+}
+
+/* Cartão: título com selo de prioridade, descrição e lista de detalhes */
+.cartao-topo {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.cartao-atividade .descricao-atividade {
+    color: var(--cor-texto-suave);
+}
+
+.cartao-atividade .descricao-vazia {
+    font-style: italic;
+}
+
+.meta-atividade {
+    margin: 0 0 0.75rem;
+}
+
+.meta-atividade div {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.3rem 0;
+    border-top: 1px dashed var(--cor-borda);
+    font-size: 0.85rem;
+}
+
+.meta-atividade dt {
+    color: var(--cor-texto-suave);
+}
+
+.meta-atividade dd {
+    margin: 0;
+    font-weight: bold;
+    text-align: right;
 }
 
 .rotulo-faixa {
@@ -564,6 +998,7 @@ footer {
     color: var(--cor-branco);
     font-size: 0.85rem;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .faixa-concluida {
@@ -578,10 +1013,271 @@ footer {
     --cor-faixa: var(--cor-alerta);
 }
 
-.faixa-andamento .rotulo-faixa {
+.faixa-andamento .rotulo-faixa,
+.rotulo-faixa.faixa-andamento {
     color: var(--cor-texto);
 }
 
 .faixa-nao-iniciada {
     --cor-faixa: var(--cor-secundaria);
+}
+
+/* ---------- Menu hambúrguer: estado aberto ---------- */
+.menu-hamburguer[aria-expanded="true"] {
+    background-color: var(--cor-fundo);
+    border-color: var(--cor-principal);
+}
+
+@media (max-width: 48rem) {
+    .navbar-links.aberto {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .navbar-links.aberto .submenu {
+        display: block;
+        position: static;
+        padding: 0 0 0 1rem;
+        border: none;
+        box-shadow: none;
+    }
+}
+
+/* ---------- Painel: ações, lista vazia e mensagem de cadastro ---------- */
+.lista-atividades:focus {
+    outline: none;
+}
+
+.acoes-atividade {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.botao-acao {
+    --cor-acao: var(--cor-principal);
+    margin-top: 0;
+    padding: 0.4rem 0.8rem;
+    background-color: transparent;
+    color: var(--cor-acao);
+    border: 2px solid var(--cor-acao);
+    font-size: 0.85rem;
+}
+
+.botao-acao:hover,
+.botao-acao:active {
+    background-color: var(--cor-acao);
+    border-color: var(--cor-acao);
+    color: var(--cor-branco);
+}
+
+.botao-acao:focus-visible {
+    outline: 3px solid var(--cor-acao);
+    outline-offset: 2px;
+}
+
+.botao-remover {
+    --cor-acao: #b3261e;
+}
+
+.mensagem-vazia {
+    grid-column: 1 / -1;
+    padding: 1rem;
+    text-align: center;
+    color: var(--cor-secundaria);
+}
+
+.mensagem-cadastro {
+    margin-top: var(--espacamento);
+    color: var(--cor-sucesso);
+    font-weight: bold;
+}
+
+/* Sem mensagem, o parágrafo não ocupa espaço; com mensagem, vira um aviso destacado */
+.mensagem-cadastro:empty {
+    display: none;
+}
+
+.mensagem-cadastro:not(:empty) {
+    padding: 0.75rem 1rem;
+    background-color: #e6f4ec;
+    border-left: 4px solid var(--cor-sucesso);
+    border-radius: var(--raio-borda);
+    color: #1b6b41;
+}
+
+/* ---------- Campo de busca com lupa ---------- */
+.campo-busca {
+    position: relative;
+}
+
+.icone-lupa {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    transform: translateY(-50%);
+    color: var(--cor-principal);
+    pointer-events: none;
+}
+
+.campo-busca input {
+    padding: 0.85rem 1.25rem 0.85rem 3rem;
+    background-color: var(--cor-branco);
+    border: 2px solid var(--cor-borda);
+    border-radius: 999px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.campo-busca input::placeholder {
+    color: #7a8791;
+}
+
+.campo-busca input:hover {
+    border-color: #b9c4cc;
+}
+
+.campo-busca input:focus {
+    border-color: var(--cor-principal);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(31, 111, 178, 0.2);
+}
+
+/* ---------- Modal de entrada (<dialog>) ---------- */
+.modal {
+    width: min(92vw, 28rem);
+    max-height: 90vh;
+    padding: 0;
+    background-color: var(--cor-branco);
+    color: var(--cor-texto);
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.modal::backdrop {
+    background-color: rgba(18, 48, 58, 0.62);
+    backdrop-filter: blur(3px);
+}
+
+.modal[open] {
+    animation: modal-entrada 0.22s ease-out;
+}
+
+@keyframes modal-entrada {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.modal-formulario {
+    max-width: none;
+    margin: 0;
+    padding: 1.75rem 1.5rem 1.5rem;
+}
+
+.modal-cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+/* Cada ícone só aparece no modal que o usa (data-icone no <dialog>) */
+.modal-icone {
+    display: none;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+}
+
+.modal[data-icone="relogio"] .modal-icone-relogio {
+    display: flex;
+    background-color: #e3eef7;
+    color: var(--cor-principal);
+}
+
+.modal[data-icone="check"] .modal-icone-check {
+    display: flex;
+    background-color: #e6f4ec;
+    color: var(--cor-sucesso);
+}
+
+.modal-titulo {
+    margin: 0;
+    font-size: 1.3rem;
+    color: var(--cor-secundaria);
+}
+
+.modal-mensagem {
+    margin: 1rem 0 0;
+    color: var(--cor-texto-suave);
+}
+
+.modal-formulario label {
+    margin-top: 1.25rem;
+}
+
+.modal-formulario input[aria-invalid="true"] {
+    border-color: var(--cor-perigo);
+    outline-color: var(--cor-perigo);
+}
+
+.modal-erro {
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--cor-perigo);
+}
+
+.modal-erro:empty {
+    display: none;
+}
+
+.modal-retorno {
+    margin: 0.75rem 0 0;
+    padding: 0.6rem 0.85rem;
+    border-radius: var(--raio-borda);
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.modal-retorno[hidden] {
+    display: none;
+}
+
+.modal-retorno[data-tipo="sucesso"] {
+    background-color: #e6f4ec;
+    color: #1b6b41;
+}
+
+.modal-retorno[data-tipo="erro"] {
+    background-color: #fdecea;
+    color: #9c1c14;
+}
+
+.modal-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.modal-acoes button {
+    margin-top: 0;
 }
