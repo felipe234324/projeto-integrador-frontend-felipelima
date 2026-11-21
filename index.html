@@ -8,20 +8,50 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!--
+        DIAGNÓSTICO DE EMPILHAMENTO (z-index)
+        Conflito: ao rolar a página, o dropdown (dentro da navbar sticky) ficava
+        atrás dos cards da grade quando o mouse passava sobre eles.
+        Causa: o hover dos cards usa transform, que cria um novo contexto de
+        empilhamento. A navbar, por ter position: sticky com z-index: auto, não
+        criava contexto próprio. Assim, os cards, que vêm depois no HTML, eram
+        pintados por cima dela e do dropdown.
+        Solução: z-index: 100 na .navbar cria um contexto de empilhamento acima
+        dos cards, e o dropdown, filho dela, vai junto. Não foi preciso aumentar
+        z-index no dropdown.
+    -->
+    <nav class="navbar" aria-label="Navegação principal">
+        <img src="assets/images/gerenciador-logo.png" alt="Logo do Gerenciador de Tarefas">
+        <h1>Gerenciador de Tarefas</h1>
+
+        <button
+            class="menu-hamburguer"
+            type="button"
+            aria-label="Abrir menu de navegação"
+            aria-expanded="false"
+            aria-controls="menu-principal"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <ul class="navbar-links" id="menu-principal">
+            <li><a href="#cabecalho-principal" class="ativo" aria-current="page">Início</a></li>
+            <li><a href="#funcionalidades">Funcionalidades</a></li>
+            <li class="tem-submenu">
+                <a href="#tarefas">Tarefas</a>
+                <ul class="submenu">
+                    <li><a href="#tarefas">Lista de tarefas</a></li>
+                    <li><a href="#grafico">Gráfico por status</a></li>
+                </ul>
+            </li>
+            <li><a href="#cadastro">Cadastrar</a></li>
+            <li><a href="#referencia">Referência</a></li>
+        </ul>
+    </nav>
+
     <header id="cabecalho-principal">
-        <nav class="navbar">
-            <img src="assets/images/gerenciador-logo.png" alt="Logo do Gerenciador de Tarefas">
-            <h1>Gerenciador de Tarefas</h1>
-
-            <ul class="navbar-links">
-                <li><a href="#funcionalidades">Funcionalidades</a></li>
-                <li><a href="#tarefas">Tarefas</a></li>
-                <li><a href="#grafico">Gráfico</a></li>
-                <li><a href="#cadastro">Cadastrar</a></li>
-                <li><a href="#referencia">Referência</a></li>
-            </ul>
-        </nav>
-
         <div class="apresentacao">
             <!-- Ícone SVG do Gerenciador de Tarefas: calendário com tarefas por status -->
             <svg
