@@ -7,6 +7,7 @@
     --cor-branco: #ffffff;
     --cor-borda: #dddddd;
     --cor-sucesso: #2e8b57;
+    --cor-alerta: #d98500;
     --espacamento: 1rem;
     --raio-borda: 0.5rem;
     --sombra: 0 2px 8px rgba(0, 0, 0, 0.12);
@@ -27,6 +28,8 @@ body {
 
 html {
     scroll-behavior: smooth;
+    /* Compensa a navbar sticky: o título da seção não fica escondido atrás dela */
+    scroll-padding-top: 6rem;
 }
 
 /* ---------- Cabeçalho ---------- */
@@ -36,8 +39,18 @@ html {
     border-bottom: 6px solid var(--cor-principal);
 }
 
-/* Navbar (Flexbox) */
+/* Navbar (Flexbox)
+   A página tem várias seções e o visitante
+   precisa trocar de uma para outra sem voltar ao topo. O sticky mantém a
+   navbar no fluxo normal, então não cobre o conteúdo nem exige padding extra
+   no body. Só funciona porque a navbar é filha direta do body: dentro do
+   <header> ela só ficaria grudada até o fim dele.
+   z-index: 100 cria o contexto de empilhamento que mantém a navbar e o
+   dropdown acima dos cards. */
 .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -223,7 +236,7 @@ label {
     font-weight: bold;
 }
 
-/* Agrupamento: */
+/* Agrupamento: os três campos compartilham o mesmo visual */
 input,
 textarea,
 select {
@@ -266,9 +279,9 @@ a:active {
     color: var(--cor-secundaria);
 }
 
-/* ---------- Navbar: links (Flexbox) ----------
-   Ficam depois dos links globais para vencer o empate de especificidade. */
+/* ---------- Navbar: links (Flexbox) ---------- */
 .navbar-links,
+.submenu,
 .grade {
     list-style-type: none;
     margin: 0;
@@ -293,6 +306,7 @@ a:active {
     border-radius: var(--raio-borda);
     color: var(--cor-secundaria);
     text-decoration: none;
+    white-space: nowrap;
     transition: background-color 0.2s, color 0.2s;
 }
 
@@ -310,6 +324,86 @@ a:active {
     outline-offset: 2px;
 }
 
+.navbar-links a.ativo {
+    background-color: var(--cor-principal);
+    color: var(--cor-branco);
+}
+
+.navbar-links a.ativo:hover {
+    background-color: var(--cor-secundaria);
+}
+
+/* ---------- Dropdown ---------- */
+
+.tem-submenu {
+    position: relative;
+}
+
+.tem-submenu > a::after {
+    content: " \25BE";
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 12rem;
+    padding: 0.25rem;
+    background-color: var(--cor-branco);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+    box-shadow: var(--sombra);
+}
+
+.tem-submenu:hover > .submenu,
+.tem-submenu:focus-within > .submenu {
+    display: block;
+}
+
+/* ---------- Botão hambúrguer ---------- */
+.menu-hamburguer {
+    display: none;
+    margin: 0 0 0 auto;
+    padding: 0.6rem;
+    background-color: transparent;
+    border: 2px solid var(--cor-borda);
+}
+
+.menu-hamburguer span {
+    display: block;
+    width: 1.5rem;
+    height: 3px;
+    background-color: var(--cor-secundaria);
+    border-radius: 2px;
+}
+
+.menu-hamburguer span + span {
+    margin-top: 0.3rem;
+}
+
+.menu-hamburguer:hover {
+    background-color: var(--cor-fundo);
+    border-color: var(--cor-borda);
+}
+
+.menu-hamburguer:focus-visible {
+    outline: 3px solid var(--cor-principal);
+    outline-offset: 2px;
+}
+
+/* Telas estreitas: mostra o hambúrguer e esconde os links
+   (o clique será implementado depois) */
+@media (max-width: 48rem) {
+    .menu-hamburguer {
+        display: block;
+    }
+
+    .navbar-links {
+        display: none;
+    }
+}
+
 /* ---------- Grade de funcionalidades (CSS Grid) ---------- */
 
 .grade {
@@ -320,10 +414,17 @@ a:active {
 }
 
 .grade li {
-    padding: 1rem 1.25rem;
+    --cor-destaque: var(--cor-principal);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem;
     background-color: var(--cor-fundo);
     border: 1px solid var(--cor-borda);
+    border-top: 4px solid var(--cor-destaque);
     border-radius: var(--raio-borda);
+    color: var(--cor-secundaria);
+    font-weight: bold;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -332,17 +433,49 @@ a:active {
     box-shadow: var(--sombra);
 }
 
-/* Primeiro item = funcionalidade principal */
-.grade li:first-child {
-    background-color: var(--cor-principal);
-    border-color: var(--cor-principal);
+/* Ícone circular criado com CSS */
+.grade li::before {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: var(--cor-destaque);
     color: var(--cor-branco);
-    font-weight: bold;
+    font-size: 1.25rem;
 }
 
-/* Itens pares em branco, alternando com os cinza */
-.grade li:nth-child(even) {
-    background-color: var(--cor-branco);
+.grade li:nth-child(1)::before {
+    content: "+";
+    content: "+" / "";
+}
+
+.grade li:nth-child(2) {
+    --cor-destaque: var(--cor-alerta);
+}
+
+.grade li:nth-child(2)::before {
+    content: "!";
+    content: "!" / "";
+}
+
+.grade li:nth-child(3) {
+    --cor-destaque: var(--cor-secundaria);
+}
+
+.grade li:nth-child(3)::before {
+    content: "\2197";
+    content: "\2197" / "";
+}
+
+.grade li:nth-child(4) {
+    --cor-destaque: var(--cor-sucesso);
+}
+
+.grade li:nth-child(4)::before {
+    content: "\2713";
+    content: "\2713" / "";
 }
 
 @media (prefers-reduced-motion: reduce) {
